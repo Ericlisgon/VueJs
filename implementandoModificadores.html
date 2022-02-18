@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./vue.js"></script>
+    <title>VueJS</title>
+    <style> 
+    </style>
+</head>
+<body>
+
+    <!-- Aprendendo mais sobre modificadores.
+        @click.prevent ==> usado para previnir um comportamento padrão sobre um link.
+        @click.once ==> quando usado, o método é disparado uma única vez.
+        @click.prevent.once ==> 
+        @keyup.a
+        @keyup.shift.enter
+    -->
+
+    <div id="app" >
+        <a href="https://google.com"
+            target="_blank"
+            v-on:click.prevent="previnirComportamentoPadrao()"
+            >
+            Link
+        </a>
+        <br>
+        Mensagem: {{ msg }}
+        <hr>
+        <button @click.once="executarUmaVez()">Botão</button>
+        <p>Cliques: {{ cliques }}</p>
+        <br>
+        <button @click="executarDiversasVezes()">contagem</button>
+        <p>Contagem: {{ contagem }}</p>
+        <hr>
+        <form @submit.prevent.once="prevenirUmaVez()">
+            <button type="submit">Enviar</button>
+        </form>
+        <p>Formulário: {{ formulario }}</p>
+        <hr>
+        <!-- Depois do @keyup. você pode inserir a tecla que deseja para acontecer o evento, podendo combinalas.
+            EX: @keyup.Shift.Enter (Tendo que presionalas ao mesmo tempo)
+        -->
+        <input type="text" @keyup.a="capturandoTeclas($event)">
+        <p>Teclas: {{ teclas }}</p>
+    </div>
+    
+
+    <script>
+
+        const vm = new Vue({ 
+            el: '#app', 
+            data: {
+                msg:'',
+                cliques: 0,
+                contagem: 0,
+                formulario: '',
+                teclas: '',
+                testando: ''
+            },
+            methods: {
+                previnirComportamentoPadrao(){
+                    this.msg = 'Comportamento padrão ativado'
+                },
+                executarUmaVez(){
+                    this.cliques++
+                },
+                executarDiversasVezes(){
+                    this.contagem++
+                },
+                prevenirUmaVez(){
+                    this.formulario = "Prevenindo o comportamento padrão"
+                },
+                capturandoTeclas(event) {
+                    this.teclas += event.key
+                }
+            }
+        })
+
+    </script>
+</body>
+</html>
