@@ -17,8 +17,11 @@
             1 = v-on: 
             2 = @
         -->
-        <input type="text" @keyup="imprimirTexto('Enviando parâmetro', 5)">
-        <button v-on:click="mensagemAlerta()">Botão</button>
+        <input type="text" @keyup="imprimirTexto('Enviando parâmetro', 5)"> <br>
+        <button v-on:click="mensagemAlerta()">Botão</button> <br>
+
+        <!-- Recuperando dados do evento -->
+        <button @click="evento($event, 'texto', 32467)">Evento</button> <br>
     </div>
     
 
@@ -40,6 +43,9 @@
                 },
                 mensagemAlerta() {
                     alert('Mensagem de alerta')
+                },
+                evento(even, p1, p2) {
+                    console.log(even, p1, p2)
                 }
             }
         })
