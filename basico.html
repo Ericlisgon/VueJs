@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./vue.js"></script>
+    <title>VueJS</title>
+</head>
+<body>
+    
+    <div id="app" >
+        {{ mensagem }} <br>
+        Valor total: {{ valorTotal }} <br>
+        Logado: {{ logado }} <br>
+        Hobbie: {{ hobbies[1] }} <br>
+        Perfil: {{ perfil.instagram }}, {{ perfil.cursos[0].nome }} <br>
+        {{ somar() }} <br>
+        {{ subtrair() }} <br>
+        {{ multiplicar() }} <br>
+        {{ divisao() }} <br>
+        {{ numeroAleatorio() }} <br>
+    </div>
+    
+
+    <script>
+
+        const vm = new Vue({ // vm = ViewModel
+            
+            el: '#app', //"#" para selecionar o ID e "." para classes
+
+            data: { // Variáveis/atributos reativos
+                mensagem: 'Primeiro template controlado pelo Vue',
+                valorTotal: 150.47, //número
+                logado: false, //booleano
+                hobbies: [
+                    'Estudar',
+                    'Jogar minecraft',
+                    'Academia'
+                ],
+                perfil: {
+                    nome: 'Ericlis Gonçalves',
+                    instagram: '@erickgonçalvs',
+                    idade: 26,
+                    cursos: [
+                        {nome: 'Java', cagaHoraria: '250 horas'},
+                        {nome: 'C#', cagaHoraria: '50 horas'}
+                    ]
+                }
+            },
+            methods: {
+                somar: function somar() { //convencional
+                    return 8 + 2;
+                },
+                subtrair: function() { //anônima
+                    return 8 - 2;
+                },
+                multiplicar: () => { //arrow function
+                return 8 * 2;
+                },
+                divisao() { //forma enxuta de deginir os pares de chaves
+                    return 8 / 2;
+                },
+                numeroAleatorio: function numeroAleatorio() {
+                    return Math.random();
+                }
+            }
+        })
+
+    </script>
+</body>
+</html>
