@@ -19,18 +19,40 @@
             height: 50px;
             display: inline-block;
         }
-
+        .verde{
+            background-color: rgb(3, 88, 3);
+        }
+        .branco{
+            background-color: white;
+        }        
+        .vermelho{
+            background-color: red;
+            color: white;
+        }
+        .azul{
+            background-color: rgb(2, 2, 185);
+            color: dimgray;
+        }
     </style>
 </head>
 <body>
     <div id="app" >
-        <div class="borda div-principal">
+        <div class="borda div-principal" :class="cor">
             Cor: {{ cor }}
+            <br>
+            Posição X do mouse: {{ posicaoX }}
+            Posição Y do mouse: {{ posicaoY }}
         </div>
         <hr>
-        <div @click="mudarCor('verde')" class="borda div-comum"></div>
-        <div class="borda div-comum"></div>
-        <div class="borda div-comum"></div>
+        <div @click="mudarCor('verde')" style="background-color: green;" class="borda div-comum"></div>
+                                    <!-- Adicionando eventos através do v-on -->
+        <div 
+          style="background-color: blue;"
+          @mouseover="mudarCor('azul')"
+          @mouseout="mudarCor('vermelho')" 
+          class="borda div-comum"></div>
+                                    <!-- Capiturando o movimento do mouse -->
+        <div @click="mudarCor('branco')" @mousemove="coordenadas($event)" class="borda div-comum"></div>
     </div>
     
 
@@ -39,11 +61,18 @@
         const vm = new Vue({ 
             el: '#app', 
             data: {
-                cor: 'branco'
+                cor: 'branco',
+                posicaoX: 0,
+                posicaoY: 0
             },
             methods: {
                 mudarCor(c){
-                    console.log(c);
+                    this.cor = c
+                },
+                coordenadas(e){
+                    this.posicaoX = e.clientX
+                    this.posicaoY = e.clientY
+                    console.log(e.clientX, e.clientY)
                 }
             }
         })
