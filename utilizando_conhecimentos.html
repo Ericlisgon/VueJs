@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./vue.js"></script>
+    <title>VueJS</title>
+    <style></style>
+</head>
+<body>
+    <div id="app" >
+        <div 
+        style="
+        background-color: rgb(83, 83, 247);
+         padding: 1;
+         border: 1;
+         margin: 0;
+         
+         ">
+            <table border="2px" align="center">
+                <thead>
+                    <tr>
+                        <th>Data: <input type="date" id="inputData"><br></th>
+                        <th>Nome: <input type="text" id="inputNome"><br></th><br>
+                    </tr>
+                    <tr>
+                        <th>Idade: <input type="number" id="inputIdade"><br></th>
+                        <th>CPF: <input type="text" id="inputCPF"><br></th><br>
+                    </tr>
+                    <tr>
+                        <th>RG: <input type="text" id="inputRG"><br></th>
+                        <th>Email: <input type="email" id="inputEmail"><br></th><br>
+                    </tr>
+                    <tr>
+                        <th>Rua: <input type="text" id="inputRua"><br></th>
+                        <th>Estado: <input type="text" id="inputEstado"><br></th><br>
+                    </tr>
+                    <tr>
+                        <th>Cidade: <input type="text" id="inputCidade"><br></th>
+                        <th>Bairro: <input type="text" id="inputBairro"><br></th><br>
+                    </tr>
+                    <tr>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div style="margin-top: 10px; margin-left: 45%;">
+            <button @click="cadastar">Cadastrar</button>
+        </div>
+        <hr>
+        <table border="2">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Data</th>
+                    <th>Nome</th>
+                    <th>Idade</th>
+                    <th>CPF</th>
+                    <th>RG</th>
+                    <th>Email</th>
+                    <th>Rua</th>
+                    <th>Estado</th>
+                    <th>Cidade</th>
+                    <th>Bairro</th>
+                </tr>
+            </thead>
+            <tbody>
+            <!--<tr v-for="(curso, chave) in cursos2"> 
+                    <td>{{chave}}</td>
+                    <td>{{curso.titulo}}</td>
+                    <td>{{curso.descicao}}</td>
+                </tr> -->
+                <tr v-for="({id, data, nome, idade}, chave) in cadastro">    <!-- Destructuring assignment -->
+                    <td>{{id}}</td>
+                    <td>{{data}}</td>
+                    <td>{{nome}}</td> 
+                </tr>
+            </tbody>
+            <hr>
+        </table>
+    </div>
+    <script>
+        const vm = new Vue({ 
+            el: '#app', 
+            data: {
+                cadastro: [{
+                id: 0,
+                data: '',
+                nome: '',
+                idade: '',
+                cpf: '',
+                rg: '',
+                email: '',
+                rua: '',
+                estado: '',
+                cidade: '',
+                bairro: ''}]
+            },
+            methods: {
+                cadastar(){
+                    this.comentarios.push({ id: 4, comentario: 'Novo comentário'})
+
+                    this.cadastro.push({
+                        id = id++,
+                        data = inputData.value,
+                        nome = inputNome.value,
+                        idade = inputIdade.value,
+                        cpf = inputCPF.value,
+                        rg = inputRG.value,
+                        email = inputEmail.value,
+                        rua = inputRua.value,
+                        estado = inputEstado.value,
+                        cidade = inputCidade.value,
+                        bairro = inputBairro.value
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+</html>
