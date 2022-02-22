@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,12 +10,34 @@
 </head>
 <body>
     <div id="app" >
-    
+        <!-- renderização normal => faz o encapsulamento das Tags. -->
+        <!-- renderização condicional => NÃO faz o encapsulamento das Tags. -->
+
+        <div v-if="saudacao" style="color: blue;"> <!-- renderização normal -->
+            <h1>Boas-vindas</h1>
+            <p>Conteúdo da tag <strong>template</strong></p>
+        </div>
+
+        <template v-if="saudacao"> <!-- renderização condicional -->
+            <h1>Boas-vindas</h1>
+            <p>Conteúdo da tag <strong>template</strong></p>
+        </template>
+        
+        <div v-for="n in 10" style="color: blue;"> <!-- renderização normal -->
+            <p>2 x {{n}} = {{ 2*n }}</p>
+        </div>
+
+        <template v-for="n in 10"> <!-- renderização condicional -->
+            <p>2 x {{n}} = {{ 2*n }}</p>
+        </template>
+
     </div>
     <script>
         const vm = new Vue({ 
             el: '#app', 
-            data: {},
+            data: {
+                saudacao: true
+            },
             methods: {}
         })
     </script>

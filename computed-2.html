@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./vue.js"></script>
+    <title>VueJS</title>
+    <style></style>
+</head>
+<body>
+    <div id="app" >
+        <!-- Refaturando o código anterior, encontrado na page computed.html -->
+        <!-- Inserindo valores para cadastramento de paciente. -->
+        <h4>Adicionar paciente</h4>
+        <span>Nome: </span><input type="text" id="inputNome"><br>
+        <span>Idade: </span><input type="text" id="inputIdade"><br>
+        <span>Plano: </span><input type="text" id="inputPlano"><br>
+
+        <!-- usando o método(@click="adicionarPaciente()") para fazer o envio dos dados por push. -->
+        <br><button @click="adicionarPaciente()">Adicionar</button>
+        <hr>
+
+        <h4>Último paciente cadastrado</h4>
+        <!-- Atualizando: método escrito em "computed", para deixar o código mais limpo e computado(ultimoPaciente). -->
+        <p v-if="pacientes.length > 0">
+            {{ ultimoPaciente }}
+        </p>
+        <hr>
+
+        <h4>Pacientes do plano Ouro</h4>
+        <!-- Atualizando: método escrito em "computed", para deixar o código mais limpo e computado(pacientesPlanoOuro). -->
+        <p v-for="p in pacientesPlanoOuro">{{ p.nome }}</p> <!-- Acessando a váriavel nome -->
+        <hr>
+
+        <h4>Pacientes cadastrados</h4>
+        <!-- v-for="p in pacientes" utilizado para repitir informações, neste caso a informação exibida é o (nome) do paciente -->
+        <div v-for="p in pacientes">
+            <hr>
+            NOME: {{ p.nome }} <br>
+            PLANO: {{ p.plano }}
+            <hr>
+        </div>
+
+    </div>
+    <script>
+        const vm = new Vue({ 
+            el: '#app', 
+            data: {
+                // Feito um array para guardar informações dos pacientes que estão sendo cadastrados.
+                pacientes:[]
+            },
+            methods: {
+                // Utilizando o método para envio de informações do paciente para o (pacientes) encontrado no (data).
+                adicionarPaciente(){
+                    this.pacientes.push({
+                        nome: inputNome.value,
+                        idade: inputIdade.value,
+                        plano: inputPlano.value
+                    })
+                }
+            },
+            computed: {
+                // Criando um método responsável para limpeza do código.
+                ultimoPaciente(){
+                    let key = this.pacientes.length - 1
+                    let txt = ''
+
+                    // Fazendo a concatenação 
+                    txt += 'Paciente: ' + this.pacientes[key].nome
+                    txt += ', Idade: ' + this.pacientes[key].idade
+                    txt += ', Plano: ' + this.pacientes[key].plano
+
+                    // Retornando os valores "modificados/concatenados" acima.
+                    return txt.toUpperCase()
+                },
+                // Criando um método responsável para limpeza do código.
+                pacientesPlanoOuro(){
+                    // Objetivo: computar um array que tenha somente pacientes do plano ouro
+                    return this.pacientes.filter(item => item.plano == 'Ouro')
+                }
+            }
+        })
+    </script>
+</body>
+</html>
