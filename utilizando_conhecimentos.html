@@ -9,111 +9,110 @@
     <style></style>
 </head>
 <body>
-    <div id="app" >
-        <div 
-        style="
-        background-color: rgb(83, 83, 247);
-         padding: 1;
-         border: 1;
-         margin: 0;
-         
-         ">
-            <table border="2px" align="center">
-                <thead>
-                    <tr>
-                        <th>Data: <input type="date" id="inputData"><br></th>
-                        <th>Nome: <input type="text" id="inputNome"><br></th><br>
-                    </tr>
-                    <tr>
-                        <th>Idade: <input type="number" id="inputIdade"><br></th>
-                        <th>CPF: <input type="text" id="inputCPF"><br></th><br>
-                    </tr>
-                    <tr>
-                        <th>RG: <input type="text" id="inputRG"><br></th>
-                        <th>Email: <input type="email" id="inputEmail"><br></th><br>
-                    </tr>
-                    <tr>
-                        <th>Rua: <input type="text" id="inputRua"><br></th>
-                        <th>Estado: <input type="text" id="inputEstado"><br></th><br>
-                    </tr>
-                    <tr>
-                        <th>Cidade: <input type="text" id="inputCidade"><br></th>
-                        <th>Bairro: <input type="text" id="inputBairro"><br></th><br>
-                    </tr>
-                    <tr>
-                    </tr>
-                </thead>
-            </table>
-        </div>
-        <div style="margin-top: 10px; margin-left: 45%;">
-            <button @click="cadastar">Cadastrar</button>
-        </div>
+    <div id="app">
+        
+        <div style="margin-bottom: 10px; background-color: aqua; ">
+            <h1 style="margin-left: 45%;">Cadastros</h1>
+        <span>Data: </span><input type="date" id="inputData">
+        <span>Nome: </span><input type="text" id="inputNome">
+        <span>Idade: </span><input type="number" id="inputIdade"><br> <br>
+        <span>CPF: </span><input type="text" id="inputCPF">
+        <span>RG: </span><input type="text" id="inputRG"><br><br>
+        <span>Email: </span><input type="email" id="inputEmail" size="100"><br><br>
+        <span>Estado: </span><input type="text" id="inputEstado">
+        <span>Cidade: </span><input type="text" id="inputCidade">
+        <span>Bairro: </span><input type="text" id="inputBairro" size="31"><br><br>
+        <span>Rua: </span><input type="text" id="inputRua" size="101"><br><br>
+
+    </div>
+    <br><button @click="cadastrar()" style="margin-left: 45%;">Adicionar</button>
+        <hr>
+        <h4>Último paciente cadastrado</h4>
+        <p v-if="cadastros.length > 0">
+            {{ ultimoCadastro }}
+        </p>
         <hr>
         <table border="2">
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Data</th>
-                    <th>Nome</th>
-                    <th>Idade</th>
+                    <th>DATA</th>
+                    <th>NOME</th>
+                    <th>IDADE</th>
                     <th>CPF</th>
                     <th>RG</th>
-                    <th>Email</th>
-                    <th>Rua</th>
-                    <th>Estado</th>
-                    <th>Cidade</th>
-                    <th>Bairro</th>
+                    <th>EMAIL</th>
+                    <th>ESTADO</th>
+                    <th>CIDADE</th>
+                    <th>BAIRRO</th>
+                    <th>RUA</th>
                 </tr>
             </thead>
             <tbody>
-            <!--<tr v-for="(curso, chave) in cursos2"> 
+                <tr v-for="(cad, chave) in cadastros"> 
                     <td>{{chave}}</td>
-                    <td>{{curso.titulo}}</td>
-                    <td>{{curso.descicao}}</td>
-                </tr> -->
-                <tr v-for="({id, data, nome, idade}, chave) in cadastro">    <!-- Destructuring assignment -->
-                    <td>{{id}}</td>
-                    <td>{{data}}</td>
-                    <td>{{nome}}</td> 
-                </tr>
+                    <td>{{cad.data}}</td>
+                    <td>{{cad.nome}}</td>
+                    <td>{{cad.idade}}</td>
+                    <td>{{cad.cpf}}</td>
+                    <td>{{cad.rg}}</td>
+                    <td>{{cad.email}}</td>
+                    <td>{{cad.estado}}</td>
+                    <td>{{cad.cidade}}</td>
+                    <td>{{cad.bairro}}</td>
+                    <td>{{cad.rua}}</td>
+                </tr> 
+
             </tbody>
             <hr>
         </table>
+
+        <hr>
+        <h4>Cadastros</h4>
+        <div v-for="c in cadastroSP">
+            <hr>
+            NOME: {{ c.nome }} <br>
+            CPF: {{ c.cpf }} <br>
+            CIDADE: {{ c.cidade }}
+            <hr>
+        </div>
+
     </div>
     <script>
         const vm = new Vue({ 
             el: '#app', 
             data: {
-                cadastro: [{
-                id: 0,
-                data: '',
-                nome: '',
-                idade: '',
-                cpf: '',
-                rg: '',
-                email: '',
-                rua: '',
-                estado: '',
-                cidade: '',
-                bairro: ''}]
+                cadastros:[]
             },
             methods: {
-                cadastar(){
-                    this.comentarios.push({ id: 4, comentario: 'Novo comentário'})
-
-                    this.cadastro.push({
-                        id = id++,
-                        data = inputData.value,
-                        nome = inputNome.value,
-                        idade = inputIdade.value,
-                        cpf = inputCPF.value,
-                        rg = inputRG.value,
-                        email = inputEmail.value,
-                        rua = inputRua.value,
-                        estado = inputEstado.value,
-                        cidade = inputCidade.value,
-                        bairro = inputBairro.value
+                cadastrar(){
+                    this.cadastros.push({
+                        data: inputData.value,
+                        nome: inputNome.value,
+                        idade: inputIdade.value,
+                        cpf: inputCPF.value,
+                        rg: inputRG.value,
+                        email: inputEmail.value,
+                        cidade: inputCidade.value,
+                        estado: inputEstado.value,
+                        bairro: inputBairro.value,
+                        rua: inputRua.value
                     })
+                }
+            },
+            computed: {
+                ultimoCadastro(){
+                    let key = this.cadastros.length - 1
+                    let txt = ''
+
+                    txt += ' Nome:' + this.cadastros[key].nome + ' '
+                    txt += ' Data:' + this.cadastros[key].data + ' '
+                    txt += ' CPF:' + this.cadastros[key].cpf + ' '
+
+                    return txt.toUpperCase()
+                },
+                cadastroSP(){
+                    return this.cadastros.filter(item => item.estado == 'sp' || 'SP' || 'sao paulo' || 'SÃO PAULO' || 'SAO PAULO') 
                 }
             }
         })
